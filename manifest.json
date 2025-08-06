@@ -1,0 +1,23 @@
+{
+  "name": "Moovio - Stream the Future",
+  "short_name": "Moovio",
+  "description": "Moovio is a fast, elegant PWA movie streaming app to watch trailers and full HD films directly from your browser.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "orientation": "portrait",
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "icons/icon-192.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "icons/icon-512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
