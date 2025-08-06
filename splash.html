@@ -1,0 +1,404 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Moovio - Splash</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gradient-colors: linear-gradient(270deg, #fd1d1d, #fcb045, #833ab4);
+      --insta-gradient: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--gradient-colors);
+      background-size: 1000% 1000%;
+      animation: gradientBG 15s ease infinite;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+      color: #fff;
+    }
+    /* background video */
+    .bg-video {
+      position: fixed;
+      inset: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      filter: brightness(0.9);
+    }
+    .video-overlay-blur {
+      position: fixed;
+      inset: 0;
+      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.2);
+      z-index: -2;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes zoomPulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @keyframes logoCinematic {
+      0% { transform: perspective(600px) scale(0.85) rotateX(8deg) rotateY(-10deg); filter: brightness(0.8) drop-shadow(0 0 4px rgba(255,255,255,0.2)); }
+      30% { transform: perspective(800px) scale(1.1) rotateX(2deg) rotateY(5deg); filter: brightness(1.2) drop-shadow(0 0 15px rgba(255,255,255,0.6)); }
+      60% { transform: perspective(600px) scale(1.02) rotateX(0deg) rotateY(0deg); filter: brightness(1) drop-shadow(0 0 8px rgba(255,255,255,0.4)); }
+      100% { transform: perspective(600px) scale(1) rotateX(0deg) rotateY(0deg); filter: brightness(1) drop-shadow(0 0 6px rgba(255,255,255,0.3)); }
+    }
+    /* light sweep overlay on logo using a wrapper trick */
+    .logo-svg {
+      width: 180px;
+      height: auto;
+      animation: logoCinematic 2.2s ease-out forwards;
+      margin-bottom: 0.2rem;
+      z-index: 2;
+      position: relative;
+    }
+    .logo-svg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
+      transform: translateX(-120%) skewX(-20deg);
+      filter: blur(12px);
+      animation: sweep 3s ease-in-out infinite 1s;
+      border-radius: 4px;
+    }
+    @keyframes sweep {
+      0% { transform: translateX(-120%) skewX(-20deg); opacity:0; }
+      40% { transform: translateX(120%) skewX(-20deg); opacity:1; }
+      80% { transform: translateX(260%) skewX(-20deg); opacity:0; }
+      100% { transform: translateX(260%) skewX(-20deg); opacity:0; }
+    }
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: var(--gradient-colors);
+      background-size: 200% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientBG 10s ease infinite, fadeInUp 1.5s ease-out;
+      margin: 0;
+      z-index: 2;
+    }
+    p {
+      font-size: 1.8rem;
+      font-weight: 500;
+      margin: 0.5rem 0 1.2rem;
+      color: #fff;
+      animation: fadeInUp 1.7s ease-out, zoomPulse 8s ease-in-out infinite;
+      transform-origin: center;
+      max-width: 85%;
+      z-index: 2;
+    }
+    .countdown-box {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+      z-index: 2;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .countdown-segment {
+      background: rgba(0,0,0,0.35);
+      padding: 14px 18px;
+      border-radius: 10px;
+      min-width: 65px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.4rem;
+      position: relative;
+    }
+    .countdown-segment .label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      margin-top: 4px;
+      opacity: 0.85;
+      font-weight: 500;
+    }
+    .button-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1rem;
+      width: 100%;
+      max-width: 500px;
+      z-index: 2;
+    }
+    .play-btn {
+      flex: 1 1 140px;
+      padding: 0.9em 1.8em;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: var(--gradient-colors);
+      background-size: 800% 800%;
+      animation: gradientBG 6s ease infinite, fadeInUp 2s ease-out;
+      color: #fff;
+      transition: transform .2s ease;
+      min-width: 150px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .play-btn.insta {
+      background: var(--insta-gradient);
+    }
+    .play-btn:hover {
+      transform: scale(1.05);
+    }
+    .sound-toggle {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      z-index: 2;
+    }
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+      z-index: 1;
+      opacity: 0.2;
+      animation: twinkle 20s linear infinite;
+    }
+    @keyframes twinkle {
+      0% { background-position: 0 0; }
+      100% { background-position: -1000px 1000px; }
+    }
+    .loader {
+      position: fixed;
+      inset: 0;
+      background: rgba(17,17,17,0.95);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      z-index: 9999;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity .4s ease, visibility .4s;
+    }
+    .loader.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .film-strip {
+      width: 300px;
+      height: 60px;
+      overflow: hidden;
+      border: 3px solid #fff;
+      border-radius: 8px;
+      display: flex;
+      gap: 6px;
+      padding: 6px;
+    }
+    .film-cell {
+      flex:1;
+      background: linear-gradient(135deg, #222 0%, #555 50%, #222 100%);
+      border-radius:4px;
+      animation: slideCell 1.2s ease-in-out infinite alternate;
+    }
+    .film-cell:nth-child(2) { animation-delay: .2s; }
+    .film-cell:nth-child(3) { animation-delay: .4s; }
+    .film-cell:nth-child(4) { animation-delay: .6s; }
+    @keyframes slideCell {
+      0% { transform: scaleY(1); }
+      50% { transform: scaleY(0.6); }
+      100% { transform: scaleY(1); }
+    }
+    .loader-text {
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: flex;
+      gap:8px;
+      align-items:center;
+    }
+    .loader-text .dot {
+      width:10px;
+      height:10px;
+      background:#fff;
+      border-radius:50%;
+      animation: blink 1.5s infinite ease-in-out;
+    }
+    .loader-text .dot:nth-child(2){ animation-delay:.3s; }
+    .loader-text .dot:nth-child(3){ animation-delay:.6s; }
+    @keyframes blink {
+      0%,100% { opacity:.2; }
+      50% { opacity:1; }
+    }
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+    .modal iframe {
+      width: 90vw;
+      height: 50vh;
+      border: none;
+      border-radius: 10px;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #fff;
+      color: #000;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 2.2rem; }
+      p { font-size: 1.3rem; }
+      .countdown-segment { font-size: 1.1rem; min-width: 50px; padding: 10px 14px; }
+      .button-row { gap: 8px; }
+      .play-btn { flex: 1 1 100%; min-width: auto; }
+    }
+  </style>
+</head>
+<body>
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="superman.mp4" type="video/mp4">
+    <!-- fallback static background -->
+  </video>
+  <div class="video-overlay-blur"></div>
+  <div class="stars"></div>
+
+  <audio id="opening-sound" autoplay loop>
+    <source src="opening.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <img src="logo.png" alt="Moovio Logo" class="logo-svg" />
+
+  <div class="countdown-box" aria-label="Countdown to featured release">
+    <div class="countdown-segment"><div id="cd-days">00</div><div class="label">Days</div></div>
+    <div class="countdown-segment"><div id="cd-hours">00</div><div class="label">Hours</div></div>
+    <div class="countdown-segment"><div id="cd-minutes">00</div><div class="label">Minutes</div></div>
+    <div class="countdown-segment"><div id="cd-seconds">00</div><div class="label">Seconds</div></div>
+  </div>
+
+  <p>Stream your favorite movies anytime, anywhere.</p>
+
+  <div class="button-row">
+    <button class="play-btn" onclick="startApp()">Start Watching</button>
+    <button class="play-btn insta" onclick="showTrailer()">▶ Watch Trailer</button>
+  </div>
+
+  <div class="sound-toggle" onclick="toggleSound()">🔊 Sound On</div>
+
+  <div class="loader" id="loader">
+    <div class="film-strip">
+      <div class="film-cell"></div>
+      <div class="film-cell"></div>
+      <div class="film-cell"></div>
+      <div class="film-cell"></div>
+    </div>
+    <div class="loader-text">
+      Loading <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-close" onclick="hideTrailer()">✖ Close</div>
+    <iframe src="https://www.youtube.com/embed/Ox8ZLF6cGM0" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    const audio = document.getElementById('opening-sound');
+    const toggleBtn = document.querySelector('.sound-toggle');
+    let isMuted = false;
+    function toggleSound() {
+      isMuted = !isMuted;
+      audio.muted = isMuted;
+      toggleBtn.innerText = isMuted ? '🔇 Sound Off' : '🔊 Sound On';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const tryPlay = () => {
+        audio.play().catch(() => {});
+        document.removeEventListener('click', tryPlay);
+      };
+      document.addEventListener('click', tryPlay);
+
+      const target = new Date();
+      target.setDate(target.getDate() + 3);
+      function updateCountdown() {
+        const now = new Date();
+        const diff = target - now;
+        if (diff < 0) return;
+        const d = Math.floor(diff / (1000*60*60*24));
+        const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+        const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+        const s = Math.floor((diff % (1000*60)) / 1000);
+        document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+        document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+        document.getElementById('cd-minutes').textContent = String(m).padStart(2,'0');
+        document.getElementById('cd-seconds').textContent = String(s).padStart(2,'0');
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    });
+
+    function startApp() {
+      document.getElementById('loader').classList.add('active');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1800);
+    }
+
+    function showTrailer() {
+      document.getElementById('modal').classList.add('active');
+    }
+
+    function hideTrailer() {
+      document.getElementById('modal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

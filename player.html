@@ -1,0 +1,279 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Watch Now - Moovio</title>
+  <style>
+    :root {
+      --gradient-colors: linear-gradient(270deg, #fd1d1d, #fcb045, #833ab4, #3f5efb, #00ff6a);
+      --background-color: #111;
+      --text-color: #fff;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --insta: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    }* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--gradient-colors);
+  background-size: 1000% 1000%;
+  color: var(--text-color);
+  animation: gradientBG 20s ease infinite;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shine {
+  0% { filter: brightness(1); transform: scale(1); }
+  40% { filter: brightness(1.2); transform: scale(1.05); }
+  70% { filter: brightness(1); transform: scale(1); }
+  100% { filter: brightness(1); transform: scale(1); }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  cursor: default;
+  background: var(--insta);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shine 3s ease-in-out infinite;
+}
+
+.logo svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.6));
+}
+
+.back-btn {
+  background: var(--insta);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.back-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(253,29,29,0.5);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  flex: 1;
+}
+
+.video-toggle {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.video-toggle button {
+  flex: 1 1 45%;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 20px;
+  background: var(--insta);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+}
+
+.video-toggle button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(253,29,29,0.5);
+}
+
+#video-section iframe,
+#video-section video {
+  width: 100%;
+  height: 250px;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.info {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+.info h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  position: relative;
+}
+
+.info h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--insta);
+  border-radius: 3px;
+}
+
+footer {
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+}
+
+.upgrade-btn {
+  background: var(--insta);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.upgrade-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(253,29,29,0.5);
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M2 7h20v13H2V7zm1-4h4l1.5 3H5.5L3 3zm6 0h4l1.5 3H11.5L9 3zm6 0h4l1.5 3h-5L15 3z"/>
+      </svg>
+      Moovio
+    </div>
+    <button class="back-btn" onclick="history.back()">⬅ Kembali</button>
+  </header>  <div class="container">
+    <div class="video-toggle">
+      <button onclick="setMode('trailer')">🎞️Trailer</button>
+      <button onclick="setMode('full')">🔒Full Movie</button>
+    </div><div id="video-section"></div>
+
+<div class="info">
+  <h2 id="title">Loading...</h2>
+  <p id="overview">Please wait while we load the movie details.</p>
+</div>
+
+  </div>  <footer>
+    © 2025 Moovio - Stream the Future 🎬
+  </footer>  <script>
+    const movies = {
+      '1': {
+        title: 'Big Buck Bunny',
+        overview: 'A short animated comedy about a giant rabbit with a heart bigger than his ears.',
+        youtubeId: 'YE7VzlLtp-4',
+        fullMovieUrl: 'https://www.w3schools.com/html/mov_bbb.mp4'
+      },
+      '2': {
+        title: 'Sintel',
+        overview: 'A girl embarks on a journey to find a dragon she raised as a child.',
+        youtubeId: 'eRsGyueVLvQ',
+        fullMovieUrl: 'https://media.w3.org/2010/05/sintel/trailer.mp4'
+      }
+    };
+
+    let currentMovie = null;
+    let currentMode = 'trailer';
+
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function currentMovieId() {
+      return getQueryParam('movie') || '1';
+    }
+
+    function loadMovie(id) {
+      currentMovie = movies[id] || movies['1'];
+      document.getElementById('title').textContent = currentMovie.title;
+      document.getElementById('overview').textContent = currentMovie.overview;
+      setMode('trailer');
+    }
+
+    function setMode(mode) {
+      currentMode = mode;
+      const container = document.getElementById('video-section');
+      container.innerHTML = '';
+
+      if (mode === 'trailer') {
+        const embedUrl = `https://www.youtube.com/embed/${currentMovie.youtubeId}?autoplay=1`;
+        container.innerHTML = `<iframe src="${embedUrl}" frameborder="0" allowfullscreen></iframe>`;
+      } else if (mode === 'full') {
+        const isPremium = checkPremiumAccess();
+        if (isPremium) {
+          container.innerHTML = `<video controls autoplay><source src="${currentMovie.fullMovieUrl}" type="video/mp4"></video>`;
+        } else {
+          container.innerHTML = `
+            <div style="padding:2rem;text-align:center;background:rgba(0,0,0,0.5);border-radius:10px;">
+              <h3>🔒 Konten Premium</h3>
+              <p>Silakan login atau upgrade akun untuk menonton full movie.</p>
+              <button class="upgrade-btn" onclick="redirectToUpgrade()">💳 Upgrade Sekarang</button>
+            </div>
+          `;
+        }
+      }
+    }
+
+    function checkPremiumAccess() {
+      return localStorage.getItem('isPremium') === '1';
+    }
+
+    function redirectToUpgrade() {
+      alert("Simulasi redirect ke halaman pembayaran...");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadMovie(currentMovieId());
+    });
+  </script></body>
+</html>
